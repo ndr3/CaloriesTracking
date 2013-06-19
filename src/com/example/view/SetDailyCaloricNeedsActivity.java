@@ -12,21 +12,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-public class SetDailyCaloricNeedsActivity extends Activity {
-	public final static String EXTRA_MESSAGE = "com.example.view.CALORIC_NEEDS";
-	
+public class SetDailyCaloricNeedsActivity extends Activity {	
 	private CaloriesCtrlActivity caloriesCtrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_daily_caloric_needs);
-		
-		if (getApplicationContext() == null) {
-			System.out.println("SetDailyCaloricNeedsActivity context == null");
-		}
-		CaloriesDbAdapter.getInstance(this);
-		
+	
+		CaloriesDbAdapter.getInstance(this);		
 		caloriesCtrl = new CaloriesCtrlActivity();
 	}
 
@@ -47,47 +41,16 @@ public class SetDailyCaloricNeedsActivity extends Activity {
 		editText = (EditText) findViewById(R.id.insert_age_edittext);
 		int age = Integer.parseInt(editText.getText().toString());
 		
-		//convert to pounds and inches
-		weight *= 2.2046;
-		height /= 2.54;
 		
 		RadioGroup radioGenderGroup = (RadioGroup) findViewById(R.id.gender_group);
-		int selectedID = radioGenderGroup.getCheckedRadioButtonId();
-		
-		int bmr;
-		if (selectedID == R.id.radio_female) {
-			bmr = (int) (655 + 4.3*weight + 4.7*height - 4.7*age);
-		} else {
-			bmr = (int) (66 + 6.3*weight + 12.9*height - 6.8*age);
-		}
+		int genderID = radioGenderGroup.getCheckedRadioButtonId();
 		
 		RadioGroup radioActivityGroup = (RadioGroup) findViewById(R.id.activity_group);
-		selectedID = radioActivityGroup.getCheckedRadioButtonId();
+		int activityID = radioActivityGroup.getCheckedRadioButtonId();
 		
-		int caloricNeeds;
-		switch (selectedID) {
-			case R.id.radio_sedentary:
-				caloricNeeds = bmr + bmr/5;
-				break;
-			case R.id.radio_lightly_active:
-				caloricNeeds = bmr + 3*bmr/10;
-				break;
-			case R.id.radio_moderately_active:
-				caloricNeeds = bmr + 2*bmr/5;
-				break;
-			case R.id.radio_very_active:
-				caloricNeeds = bmr + bmr/2;
-				break;
-			case R.id.radio_extra_active:
-				caloricNeeds = bmr + 3*bmr/5;
-				break;
-			default: caloricNeeds = 0;				
-		}
-		
-		caloriesCtrl.setCaloricNeeds(caloricNeeds);
+		caloriesCtrl.setCaloricNeeds(weight, height, age, genderID, activityID);
 		
 		Intent intent = new Intent(this, DisplayCaloricNeedsActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, String.valueOf(caloricNeeds));
 		startActivity(intent);
 	}
 }

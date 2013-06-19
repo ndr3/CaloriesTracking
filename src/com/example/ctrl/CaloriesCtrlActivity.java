@@ -9,51 +9,49 @@ public class CaloriesCtrlActivity {
 	private CaloriesDbAdapter caloriesDbAdapter = null;
 	
 	public CaloriesCtrlActivity() {
-		caloriesInfo = new CaloriesInfo(); 
+		caloriesInfo = CaloriesInfo.getInstance(); 
 		caloriesDbAdapter = CaloriesDbAdapter.getInstance(null);
-		if (caloriesDbAdapter == null) 
-			System.out.println("adapter null");
 		
 		//fill the model		
-		try {
-			caloriesDbAdapter.setCaloricNeeds(1800);
-			caloriesDbAdapter.addCalories(150);
-			caloriesDbAdapter.addCalories(400);
-			
-			
-			
+		
+		int caloricNeeds = 0;
+		int consumedCalories = 0;
+		
+		try {				
 			Cursor caloricNeedsCursor = caloriesDbAdapter.fetchCaloricNeeds();
 			caloricNeedsCursor.moveToFirst();			
-			int caloricNeeds = caloricNeedsCursor.getInt(0);
-			
-			caloriesInfo.setCaloricNeeds(caloricNeeds);
-			
-			Cursor todayCaloriesCursor = caloriesDbAdapter.fetchTodayCalories();
-			int consumedCalories = 0;		
-			for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext()) {
-				consumedCalories += todayCaloriesCursor.getInt(1);
-			}
-			
-			caloriesInfo.setTodayCalories(consumedCalories);		
-			caloriesInfo.setRemainingCalories(caloricNeeds - consumedCalories);
-			
+			caloricNeeds = caloricNeedsCursor.getInt(0);
 		} catch (Exception e) {			
+			caloricNeeds = 2000;
 			System.out.println("Ctrl/Constructor exception");
 			e.printStackTrace();
 		}
+		
+		try {			
+			Cursor todayCaloriesCursor = caloriesDbAdapter.fetchTodayCalories();
+					
+			for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext()) {
+				consumedCalories += todayCaloriesCursor.getInt(1);
+			}		
+		} catch (Exception e) {			
+			consumedCalories = 0;
+			System.out.println("Ctrl/Constructor exception");
+			e.printStackTrace();
+		}
+
+		caloriesInfo.setCaloricNeeds(caloricNeeds);
+		caloriesInfo.setTodayCalories(consumedCalories);		
+		caloriesInfo.setRemainingCalories(caloricNeeds - consumedCalories);
+		
 	}
 	
 	public void addCalories(int calories) {		
 		try {
-		int todayCalories = caloriesInfo.getTodayCalories();
-	
-		caloriesInfo.setTodayCalories(todayCalories + calories);
-		caloriesDbAdapter.addCalories(calories);
-		
-		} catch(NullPointerException e) {
-			System.out.println("Ctrl/addCalories null pointer exception");
-		} catch (Exception ex) {
+			caloriesInfo.addCalories(calories);
+			caloriesDbAdapter.addCalories(calories);		
+		} catch (Exception e) {
 			System.out.println("Ctrl/getCalories exception");
+			e.printStackTrace();
 		}
 	}
 	
@@ -61,34 +59,35 @@ public class CaloriesCtrlActivity {
 		return caloriesInfo.getTodayCalories();
 	}
 	
-	public void setCaloricNeeds(int caloricNeeds) {
-		caloriesInfo.setCaloricNeeds(caloricNeeds);
-		caloriesDbAdapter.setCaloricNeeds(caloricNeeds);
-	}
-	
 	public int getCaloricNeeds() {
 		try {
 			Cursor caloricNeedsCursor = caloriesDbAdapter.fetchCaloricNeeds();
 			caloricNeedsCursor.moveToFirst();
 			return caloricNeedsCursor.getInt(0);
-		} catch (NullPointerException e) {
-			System.out.println("Ctrl/getCaloricNeeds null pointer exception");
-			return 0;
-		} catch (Exception ex) {
+		} catch (Exception e) {
 			System.out.println("Ctrl/getCaloricNeeds exception");
+			e.printStackTrace();
 			return 0;
 		}
 	}
 	
 	public int getRemainingCalories() {
 		try {
-			return caloriesInfo.getCaloricNeeds() - caloriesInfo.getTodayCalories();
-		} catch (NullPointerException e) {
-			System.out.println("Ctrl/getRemainingCalories null pointer exception");
-			return 0;
-		} catch (Exception ex) {
+			return caloriesInfo.getRemainingCalories();
+		} catch (Exception e) {
 			System.out.println("Ctrl/getRemainingCalories exception");
+			e.printStackTrace();
 			return 0;
+		}
+	}
+	
+	public void setCaloricNeeds(int weight, int height, int age, int genderID, int activityID) {
+		try {
+			int caloricNeeds = caloriesInfo.computeDailyCaloricNeeds(weight, height, age, genderID, activityID);
+			caloriesInfo.setCaloricNeeds(caloricNeeds);
+			caloriesDbAdapter.setCaloricNeeds(caloricNeeds);			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

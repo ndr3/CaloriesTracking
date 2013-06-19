@@ -22,16 +22,11 @@ public class DisplayCaloriesActivity extends Activity{
 			// Show the Up button in the action bar.
 			setupActionBar();
 			
-			if (getApplicationContext() == null) {
-				System.out.println("DisplayCaloriesActivity context == null");
-			}
-			CaloriesDbAdapter.getInstance(this);
-			
+			CaloriesDbAdapter.getInstance(this);			
 			caloriesCtrl = new CaloriesCtrlActivity();
 			
-			int calories = 0;
 			Intent intent = getIntent();
-			calories = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
+			int calories = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
 
 			//add calories to DB			
 			try {
