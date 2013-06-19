@@ -48,7 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/button2"
         android:layout_marginBottom="64dp"
-        android:onClick="setDailyCaloricNeed"
+        android:onClick="viewHistoricData"
         android:text="@string/historic_data" />
 
 </RelativeLayout>

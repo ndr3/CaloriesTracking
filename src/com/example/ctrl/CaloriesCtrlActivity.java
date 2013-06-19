@@ -22,7 +22,10 @@ public class CaloriesCtrlActivity {
 			caloricNeedsCursor.moveToFirst();			
 			caloricNeeds = caloricNeedsCursor.getInt(0);
 		} catch (Exception e) {			
-			caloricNeeds = 2000;
+			int defaultCaloricNeeds = 2000;			
+			caloricNeeds = defaultCaloricNeeds;
+			caloriesDbAdapter.setCaloricNeeds(defaultCaloricNeeds);
+			
 			System.out.println("Ctrl/Constructor exception");
 			e.printStackTrace();
 		}
@@ -33,8 +36,11 @@ public class CaloriesCtrlActivity {
 			for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext()) {
 				consumedCalories += todayCaloriesCursor.getInt(1);
 			}		
-		} catch (Exception e) {			
-			consumedCalories = 0;
+		} catch (Exception e) {		
+			int defaultTotalCalories = 0;
+			consumedCalories = defaultTotalCalories;
+			caloriesDbAdapter.addCalories(defaultTotalCalories);
+			
 			System.out.println("Ctrl/Constructor exception");
 			e.printStackTrace();
 		}

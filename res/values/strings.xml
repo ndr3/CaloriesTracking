@@ -25,12 +25,15 @@
     <string name="very_active">Very active</string>
     <string name="extra_active">Extra active</string>
     <string name="title_activity_display_caloric_needs">DisplayCaloricNeedsActivity</string>
-    <string name="historic_data">hihihi</string>
+    <string name="historic_data">View Historic Data</string>
     <string name="title_activity_set_daily_caloric_needs">SetDailyCaloricNeedsActivity</string>
     <string name="title_activity_my">MyActivity</string>
     <string name="ctrl">Ctrl</string>
     <string name="model">Model</string>
     <string name="title_activity_wmain">WMainActivity</string>
     <string name="title_activity_samain">SAMainActivity</string>
+    <string name="title_activity_display_historic_data">DisplayHistoricDataActivity</string>
+    <string name="view_older_data">View Older Data</string>
+    <string name="title_activity_display_older_data">DisplayOlderDataActivity</string>
 
 </resources>

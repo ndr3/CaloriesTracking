@@ -37,4 +37,9 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, com.example.view.SetDailyCaloricNeedsActivity.class);
 		startActivity(intent);
 	}
+	
+	public void viewHistoricData(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayHistoricDataActivity.class);
+		startActivity(intent);
+	}
 }

@@ -50,6 +50,14 @@
             android:name="com.example.util.SAMainActivity"
             android:label="@string/title_activity_samain" >
         </activity>
+        <activity
+            android:name="com.example.view.DisplayHistoricDataActivity"
+            android:label="@string/title_activity_display_historic_data" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayOlderDataActivity"
+            android:label="@string/title_activity_display_older_data" >
+        </activity>
     </application>
 
 </manifest>
