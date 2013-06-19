@@ -119,7 +119,7 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public Cursor fetchTodayCalories() {	
+	public int fetchTodayCalories() {	
 		//compute the miliseconds that passed since yesterday
 		Date d = new Date();
 		int hours = d.getHours() + 3;
@@ -133,7 +133,13 @@ public class CaloriesDbAdapter extends Activity {
 		long yesterday = timestamp - todayPassedMilisecs; 		
 		
 		//select only calories eaten today
-		return db.rawQuery("SELECT * FROM calories WHERE eaten_date > ?", new String[] {String.valueOf(yesterday)});
+		int consumedCalories = 0;
+		Cursor todayCaloriesCursor = db.rawQuery("SELECT * FROM calories WHERE eaten_date > ?", new String[] {String.valueOf(yesterday)});
+		for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext())
+			consumedCalories += todayCaloriesCursor.getInt(1);
+		
+		return consumedCalories;
+			
 	}
 	
 	public Cursor fetchAllCalories() {
@@ -159,8 +165,32 @@ public class CaloriesDbAdapter extends Activity {
 		return 0;
 	}
 
-	public Cursor fetchCaloricNeeds() {
-		return db.query(DATABASE_USERS_TABLE, new String[] {KEY_CALORIC_NEED}, null, null, null, null, null);
+	public int fetchCaloricNeeds() {
+		try {
+		Cursor caloricNeedsCursor = db.query(DATABASE_USERS_TABLE, new String[] {KEY_CALORIC_NEED}, null, null, null, null, null);
+		caloricNeedsCursor.moveToFirst();
+		return caloricNeedsCursor.getInt(0);
+		} catch (Exception e) {
+			System.out.println("DbAdapter/fetchCaloricNeeds exception");
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	
+	public String getWeekData() {
+		
+		
+		Calendar calendar = Calendar.getInstance();
+		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+		
+		String weekData = "";//String.valueOf(dayOfTheWeek) + "\n";
+		
+		for (int i = 1; i <= dayOfTheWeek; i++) {
+			weekData = weekData + String.valueOf(i) + "\n";
+		}
+		
+		return weekData;
 	}
 
 	public void deleteCaloriesTable() {

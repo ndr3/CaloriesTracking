@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 public class DisplayHistoricDataActivity extends Activity {
@@ -19,22 +20,27 @@ public class DisplayHistoricDataActivity extends Activity {
 		setContentView(R.layout.activity_display_historic_data);
 		
 		CaloriesDbAdapter.getInstance(this);			
-		caloriesCtrl = new CaloriesCtrlActivity();
-		
+		caloriesCtrl = new CaloriesCtrlActivity();		
+		@SuppressWarnings("unused")
 		Intent intent = getIntent();
 		
 		TextView caloricNeedsTextView = (TextView) findViewById(R.id.historic_caloric_needs_textView);
-		caloricNeedsTextView.setTextSize(22);
+		caloricNeedsTextView.setTextSize(18);
 		caloricNeedsTextView.setTextColor(Color.rgb(45, 100, 180));
 		caloricNeedsTextView.setText("Your daily caloric needs are: " + caloriesCtrl.getCaloricNeeds() + " kcal");
 		
 		TextView totalCaloriesTextView = (TextView) findViewById(R.id.historic_total_calories_textView);
-		totalCaloriesTextView.setTextSize(22);
+		totalCaloriesTextView.setTextSize(18);
 		totalCaloriesTextView.setTextColor(Color.rgb(45, 100, 180));
 		totalCaloriesTextView.setText("Today consumed calories: " + caloriesCtrl.getTodayCalories() + " kcal");
+		
+		TextView remainingCaloriesTextView = (TextView) findViewById(R.id.historic_remaining_calories_textView);
+		remainingCaloriesTextView.setTextSize(18);
+		remainingCaloriesTextView.setTextColor(Color.rgb(45, 100, 180));
+		remainingCaloriesTextView.setText("Remaining calories: " + caloriesCtrl.getRemainingCalories() + " kcal");
 	}
 
-	public void viewOlderData() { 
+	public void viewOlderData(View view) { 
 		Intent intent = new Intent(this, com.example.view.DisplayOlderDataActivity.class);
 		startActivity(intent);
 	}

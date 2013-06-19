@@ -30,8 +30,6 @@
     <string name="title_activity_my">MyActivity</string>
     <string name="ctrl">Ctrl</string>
     <string name="model">Model</string>
-    <string name="title_activity_wmain">WMainActivity</string>
-    <string name="title_activity_samain">SAMainActivity</string>
     <string name="title_activity_display_historic_data">DisplayHistoricDataActivity</string>
     <string name="view_older_data">View Older Data</string>
     <string name="title_activity_display_older_data">DisplayOlderDataActivity</string>

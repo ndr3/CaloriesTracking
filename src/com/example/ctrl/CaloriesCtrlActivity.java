@@ -1,6 +1,5 @@
 package com.example.ctrl;
 
-import android.database.Cursor;
 import com.example.model.CaloriesInfo;
 import com.example.utils.CaloriesDbAdapter;
 
@@ -17,10 +16,8 @@ public class CaloriesCtrlActivity {
 		int caloricNeeds = 0;
 		int consumedCalories = 0;
 		
-		try {				
-			Cursor caloricNeedsCursor = caloriesDbAdapter.fetchCaloricNeeds();
-			caloricNeedsCursor.moveToFirst();			
-			caloricNeeds = caloricNeedsCursor.getInt(0);
+		try {								
+			caloricNeeds = caloriesDbAdapter.fetchCaloricNeeds(); 
 		} catch (Exception e) {			
 			int defaultCaloricNeeds = 2000;			
 			caloricNeeds = defaultCaloricNeeds;
@@ -31,11 +28,7 @@ public class CaloriesCtrlActivity {
 		}
 		
 		try {			
-			Cursor todayCaloriesCursor = caloriesDbAdapter.fetchTodayCalories();
-					
-			for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext()) {
-				consumedCalories += todayCaloriesCursor.getInt(1);
-			}		
+			consumedCalories = caloriesDbAdapter.fetchTodayCalories();
 		} catch (Exception e) {		
 			int defaultTotalCalories = 0;
 			consumedCalories = defaultTotalCalories;
@@ -67,9 +60,7 @@ public class CaloriesCtrlActivity {
 	
 	public int getCaloricNeeds() {
 		try {
-			Cursor caloricNeedsCursor = caloriesDbAdapter.fetchCaloricNeeds();
-			caloricNeedsCursor.moveToFirst();
-			return caloricNeedsCursor.getInt(0);
+			return caloriesDbAdapter.fetchCaloricNeeds();
 		} catch (Exception e) {
 			System.out.println("Ctrl/getCaloricNeeds exception");
 			e.printStackTrace();
@@ -95,5 +86,9 @@ public class CaloriesCtrlActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getWeekData() {
+		return caloriesDbAdapter.getWeekData();
 	}
 }
