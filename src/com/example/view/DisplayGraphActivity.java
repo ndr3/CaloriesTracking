@@ -1,126 +1,49 @@
 package com.example.view;
 
 import com.example.ctrl.CaloriesCtrl;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.view.Menu;
-import android.view.View;
+import android.widget.LinearLayout;
 
 public class DisplayGraphActivity extends Activity {
 	CaloriesCtrl caloriesCtrl;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_graph);
-		//setContentView(new MyView(this));
-		
-		caloriesCtrl = CaloriesCtrl.getInstance();
-		@SuppressWarnings("unused")
-		Intent intent = getIntent();
-		
-		
-		
-		GraphView graphView = new GraphView(
-				  this // context
-				  , new GraphViewData[] {
-				    new GraphViewData(1, 2.0d)
-				    , new GraphViewData(2, 1.5d)
-				    , new GraphViewData(2.5, 3.0d) // another frequency
-				    , new GraphViewData(3, 2.5d)
-				    , new GraphViewData(4, 1.0d)
-				    , new GraphViewData(5, 3.0d)
-				  } // data
-				  , "GraphViewDemo" // heading
-				  , null // dynamic labels
-				  , null // dynamic labels
-				);
-	}
 
-	public class MyView extends View {
-		class Pt{
-
-	  		float x, y;
-
-	  		
-
-	  		Pt(float _x, float _y){
-
-	  			x = _x;
-
-	  			y = _y;
-
-	  		}
-
-	  	}
-		Pt[] myPath = { new Pt(100, 100),
-
-					new Pt(200, 200),
-
-					new Pt(200, 500),
-
-					new Pt(400, 500),
-
-					new Pt(400, 200)
-
-					};
-
-
-
-	public MyView(Context context) {
-
-		super(context);
-
-		// TODO Auto-generated constructor stub
-
-	}
-
-
-
-	@Override
-
-	protected void onDraw(Canvas canvas) {
-
-		// TODO Auto-generated method stub
-
-		super.onDraw(canvas);
-
-
-
-		
-
-		Paint paint = new Paint();
-
-		paint.setColor(Color.WHITE);
-
-		paint.setStrokeWidth(3);
-
-		paint.setStyle(Paint.Style.STROKE);
-
-		Path path = new Path();
-
-		
-
-		path.moveTo(myPath[0].x, myPath[0].y);
-
-		for (int i = 1; i < myPath.length; i++){
-
-			path.lineTo(myPath[i].x, myPath[i].y);
-
+		//Advanced graph
+		// draw sin curve
+		int num = 150;
+		GraphViewData[] data = new GraphViewData[num];
+		double v=0;
+		for (int i=0; i<num; i++) {
+			v += 0.2;
+			data[i] = new GraphViewData(i, Math.sin(v));
 		}
+		// graph with dynamically genereated horizontal and vertical labels
+		GraphView graphView;
 
-		canvas.drawPath(path, paint);
-
-		
-
-	}
+			graphView = new LineGraphView(
+					this
+					, "GraphViewDemo"
+			);
+			
+		//}
+		// add data
+		graphView.addSeries(new GraphViewSeries(data));
+		// set view port, start=2, size=40
+		graphView.setViewPort(2, 40);
+		graphView.setScrollable(true);
+		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+		layout.addView(graphView);
 	}
 	
 	@Override
