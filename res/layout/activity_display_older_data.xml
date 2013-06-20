@@ -27,7 +27,7 @@
         android:layout_marginTop="39dp"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/view_graph_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -36,7 +36,8 @@
         android:text="@string/view_graph_representation" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/view_month_data_button"
+        android:onClick="viewMonthData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

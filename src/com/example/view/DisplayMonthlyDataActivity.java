@@ -29,7 +29,7 @@ public class DisplayMonthlyDataActivity extends Activity {
 		TextView daysDataTextView = (TextView) findViewById(R.id.month_days_textview);
 		daysDataTextView.setTextSize(11);
 		daysDataTextView.setTextColor(Color.rgb(45, 100, 180));
-		daysDataTextView.setText(caloriesCtrl.getWeekData());
+		daysDataTextView.setText(caloriesCtrl.getMonthData());
 	}
 
 	@Override

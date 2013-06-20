@@ -100,4 +100,8 @@ public class CaloriesCtrl {
 	public String getWeekData() {
 		return caloriesDbAdapter.fetchWeekData();
 	}
+	
+	public String getMonthData() {
+		return caloriesDbAdapter.fetchMonthData();
+	}
 }

@@ -1,6 +1,5 @@
 package com.example.view;
 
-
 import com.example.ctrl.CaloriesCtrl;
 
 import android.app.Activity;
