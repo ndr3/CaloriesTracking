@@ -36,5 +36,6 @@
     <string name="title_activity_display_monthly_data">DisplayMonthlyDataActivity</string>
     <string name="view_graph_representation">View graph representation</string>
     <string name="view_month_data">View month data</string>
+    <string name="title_activity_display_graph">DisplayGraphActivity</string>
 
 </resources>

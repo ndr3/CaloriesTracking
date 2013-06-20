@@ -38,6 +38,11 @@ public class DisplayOlderDataActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public void viewGraph(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayGraphActivity.class);
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

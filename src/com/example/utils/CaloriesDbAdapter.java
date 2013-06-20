@@ -201,7 +201,7 @@ public class CaloriesDbAdapter extends Activity {
 		long wholeDayInMilisecs = 24*60*60*1000;
 		
 		int todayCalories = fetchTodayCalories();
-		weekData.add(days[dayOfTheWeek - 1] + " " + String.valueOf(todayCalories) + " cal\n");
+		weekData.add(days[dayOfTheWeek - 1] + " " + String.valueOf(todayCalories) + " calories\n");
 		totalConsumedCalories += todayCalories;
 		
 		//get other days calories		
@@ -210,7 +210,7 @@ public class CaloriesDbAdapter extends Activity {
 		
 		for (int i = dayOfTheWeek - 1; i > 0; i--) {
 			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
-			weekData.add(days[dayOfTheWeek - passedDays - 1] + " " + String.valueOf(dailyCalories) + " cal\n");
+			weekData.add(days[dayOfTheWeek - passedDays - 1] + " " + String.valueOf(dailyCalories) + " calories\n");
 			totalConsumedCalories += dailyCalories;
 			passedDays++;
 		}		
@@ -220,13 +220,14 @@ public class CaloriesDbAdapter extends Activity {
 			finalData += weekData.get(i);
 		}
 		
-		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " cal\n";
-		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheWeek + " cal\n";
-		finalData += "Average calories intake: " + totalConsumedCalories/dayOfTheWeek + " cal\n";
+		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " calories\n";
+		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheWeek + " calories\n";
+		finalData += "Average calories intake per day: " + totalConsumedCalories/dayOfTheWeek + " calories\n";
 		
 		return finalData;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public String fetchMonthData() {
 		ArrayList<String> monthData = new ArrayList<String>();
 		int totalConsumedCalories = 0;
@@ -247,7 +248,7 @@ public class CaloriesDbAdapter extends Activity {
 		long wholeDayInMilisecs = 24*60*60*1000;
 		
 		int todayCalories = fetchTodayCalories();
-		monthData.add("Day " + dayOfTheMonth + ": " + String.valueOf(todayCalories) + " cal\n");
+		monthData.add("Day " + dayOfTheMonth + ": " + String.valueOf(todayCalories) + " calories\n");
 		totalConsumedCalories += todayCalories;
 		
 		//get other days calories		
@@ -256,7 +257,7 @@ public class CaloriesDbAdapter extends Activity {
 		
 		for (int i = dayOfTheMonth - 1; i > 0; i--) {
 			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
-			monthData.add("Day " + String.valueOf(dayOfTheMonth - passedDays) + ": " + String.valueOf(dailyCalories) + " cal\n");
+			monthData.add("Day " + String.valueOf(dayOfTheMonth - passedDays) + ": " + String.valueOf(dailyCalories) + " calories\n");
 			totalConsumedCalories += dailyCalories;
 			passedDays++;
 		}		
@@ -266,9 +267,9 @@ public class CaloriesDbAdapter extends Activity {
 			finalData += monthData.get(i);
 		}
 		
-		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " cal\n";
-		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheMonth + " cal\n";
-		finalData += "Average calories intake: " + totalConsumedCalories/dayOfTheMonth + " cal\n";
+		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " calories\n";
+		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheMonth + " calories\n";
+		finalData += "Average calories intake per day: " + totalConsumedCalories/dayOfTheMonth + " calories\n";
 		
 		return finalData;
 	}

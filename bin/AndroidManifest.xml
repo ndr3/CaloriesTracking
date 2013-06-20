@@ -54,6 +54,10 @@
             android:name="com.example.view.DisplayMonthlyDataActivity"
             android:label="@string/title_activity_display_monthly_data" >
         </activity>
+        <activity
+            android:name="com.example.view.DisplayGraphActivity"
+            android:label="@string/title_activity_display_graph" >
+        </activity>
     </application>
 
 </manifest>

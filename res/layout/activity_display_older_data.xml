@@ -28,6 +28,7 @@
 
     <Button
         android:id="@+id/view_graph_button"
+        android:onClick="viewGraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
