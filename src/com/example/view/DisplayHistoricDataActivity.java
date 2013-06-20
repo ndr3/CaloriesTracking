@@ -1,6 +1,6 @@
 package com.example.view;
 
-import com.example.ctrl.CaloriesCtrlActivity;
+import com.example.ctrl.CaloriesCtrl;
 import com.example.utils.CaloriesDbAdapter;
 
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class DisplayHistoricDataActivity extends Activity {
-	CaloriesCtrlActivity caloriesCtrl;
+	CaloriesCtrl caloriesCtrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class DisplayHistoricDataActivity extends Activity {
 		setContentView(R.layout.activity_display_historic_data);
 		
 		CaloriesDbAdapter.getInstance(this);			
-		caloriesCtrl = new CaloriesCtrlActivity();		
+		caloriesCtrl = CaloriesCtrl.getInstance();
 		@SuppressWarnings("unused")
 		Intent intent = getIntent();
 		

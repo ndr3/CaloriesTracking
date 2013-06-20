@@ -1,7 +1,7 @@
 package com.example.view;
 
 import com.example.view.R;
-import com.example.ctrl.CaloriesCtrlActivity;
+import com.example.ctrl.CaloriesCtrl;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -10,14 +10,14 @@ import android.view.Menu;
 import android.widget.TextView;
 
 public class DisplayCaloricNeedsActivity extends Activity {
-	CaloriesCtrlActivity caloriesCtrl;
+	CaloriesCtrl caloriesCtrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_caloric_needs);
 		
-		caloriesCtrl = new CaloriesCtrlActivity();
+		caloriesCtrl = CaloriesCtrl.getInstance();
 		
 		String caloricNeeds = String.valueOf(caloriesCtrl.getCaloricNeeds());
 		

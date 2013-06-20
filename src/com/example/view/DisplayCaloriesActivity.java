@@ -2,7 +2,7 @@ package com.example.view;
 
 import com.example.utils.CaloriesDbAdapter;
 import com.example.view.R;
-import com.example.ctrl.CaloriesCtrlActivity;
+import com.example.ctrl.CaloriesCtrl;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 public class DisplayCaloriesActivity extends Activity{
-		private CaloriesCtrlActivity caloriesCtrl;
+		private CaloriesCtrl caloriesCtrl;
 		
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -23,7 +23,7 @@ public class DisplayCaloriesActivity extends Activity{
 			setupActionBar();
 			
 			CaloriesDbAdapter.getInstance(this);			
-			caloriesCtrl = new CaloriesCtrlActivity();
+			caloriesCtrl = CaloriesCtrl.getInstance();
 			
 			Intent intent = getIntent();
 			int calories = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));

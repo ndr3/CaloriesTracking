@@ -1,5 +1,6 @@
 package com.example.utils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import android.annotation.SuppressLint;
@@ -91,9 +92,6 @@ public class CaloriesDbAdapter extends Activity {
 			dbHelper = DatabaseHelper.getInstance(ctx);					
 			db = dbHelper.getWritableDatabase();
 			
-			if (db == null) {
-				System.out.println("db == null");
-			}
 			return this;
 		} catch (NullPointerException e) {
 			System.out.println("CaloriesDbAdapter/Open null pointer exception");
@@ -178,19 +176,68 @@ public class CaloriesDbAdapter extends Activity {
 		
 	}
 	
-	public String getWeekData() {
-		
-		
+	@SuppressWarnings("deprecation")
+	public String fetchWeekData() {
+		//get day of the week
 		Calendar calendar = Calendar.getInstance();
 		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		
-		String weekData = "";//String.valueOf(dayOfTheWeek) + "\n";
+		ArrayList<String> weekData = new ArrayList<String>();
+		int totalConsumedCalories = 0;
+		String finalData = "";
 		
-		for (int i = 1; i <= dayOfTheWeek; i++) {
-			weekData = weekData + String.valueOf(i) + "\n";
+		//get calories for each day
+		//get today calories
+		Date d = new Date();
+		int hours = d.getHours() + 3;
+		int minutes = d.getMinutes();
+		int seconds = d.getSeconds();
+		
+		long todayPassedMilisecs = hours*60*60*1000 + minutes*60*1000 + seconds*1000;
+		long rightNow = calendar.getTimeInMillis();		
+		long begginingOfToday = rightNow - todayPassedMilisecs;
+		
+		String[] days = new String[] {"Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday: ", "Saturday: ", "Sunday: "};
+		long wholeDayInMilisecs = 24*60*60*1000;
+		
+		int todayCalories = fetchTodayCalories();
+		weekData.add(days[dayOfTheWeek - 1] + " " + String.valueOf(todayCalories) + "\n");
+		totalConsumedCalories += todayCalories;
+		
+		//get other days calories		
+		int passedDays = 1;		
+		int dailyCalories = 0;
+		
+		for (int i = dayOfTheWeek - 1; i > 0; i--) {
+			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
+			weekData.add(days[dayOfTheWeek - passedDays - 1] + " " + String.valueOf(dailyCalories) + "\n");
+			totalConsumedCalories += dailyCalories;
+			passedDays++;
+		}		
+		
+		//order days
+		for(int i = weekData.size() - 1; i >=0; i--) {
+			finalData += weekData.get(i);
 		}
 		
-		return weekData;
+		finalData += "\nTotal consumed calories: " + totalConsumedCalories + "\n";
+		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheWeek + "\n";
+		
+		return finalData;
+	}
+	
+	public int fetchDailyCalories(long begin, long end) {
+		int consumedCalories = 0;
+		try {
+			Cursor todayCaloriesCursor = db.rawQuery("SELECT * FROM calories WHERE eaten_date > ? AND eaten_date < ?", new String[] {String.valueOf(begin), String.valueOf(end)});
+			for (todayCaloriesCursor.moveToFirst(); !todayCaloriesCursor.isAfterLast(); todayCaloriesCursor.moveToNext())
+				consumedCalories += todayCaloriesCursor.getInt(1);
+			
+			return consumedCalories;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	public void deleteCaloriesTable() {

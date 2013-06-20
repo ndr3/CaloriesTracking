@@ -3,11 +3,20 @@ package com.example.ctrl;
 import com.example.model.CaloriesInfo;
 import com.example.utils.CaloriesDbAdapter;
 
-public class CaloriesCtrlActivity {
+public class CaloriesCtrl {
+	private static CaloriesCtrl instance = null;
 	private CaloriesInfo caloriesInfo;
-	private CaloriesDbAdapter caloriesDbAdapter = null;
+	private CaloriesDbAdapter caloriesDbAdapter;
 	
-	public CaloriesCtrlActivity() {
+	public static CaloriesCtrl getInstance() {
+		if (instance == null) {
+			instance = new CaloriesCtrl();
+		}
+		
+		return instance;
+	}
+	
+	private CaloriesCtrl() {
 		caloriesInfo = CaloriesInfo.getInstance(); 
 		caloriesDbAdapter = CaloriesDbAdapter.getInstance(null);
 		
@@ -89,6 +98,6 @@ public class CaloriesCtrlActivity {
 	}
 	
 	public String getWeekData() {
-		return caloriesDbAdapter.getWeekData();
+		return caloriesDbAdapter.fetchWeekData();
 	}
 }

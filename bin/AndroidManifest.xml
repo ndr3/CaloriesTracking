@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.ctrl.CaloriesCtrlActivity"
+            android:name="com.example.ctrl.CaloriesCtrl"
             android:label="@string/ctrl" >
         </activity>
         <activity
@@ -49,6 +49,10 @@
         <activity
             android:name="com.example.view.DisplayOlderDataActivity"
             android:label="@string/title_activity_display_older_data" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayMonthlyDataActivity"
+            android:label="@string/title_activity_display_monthly_data" >
         </activity>
     </application>
 

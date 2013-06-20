@@ -2,7 +2,7 @@ package com.example.view;
 
 import com.example.utils.CaloriesDbAdapter;
 import com.example.view.R;
-import com.example.ctrl.CaloriesCtrlActivity;
+import com.example.ctrl.CaloriesCtrl;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 public class SetDailyCaloricNeedsActivity extends Activity {	
-	private CaloriesCtrlActivity caloriesCtrl;
+	private CaloriesCtrl caloriesCtrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class SetDailyCaloricNeedsActivity extends Activity {
 		setContentView(R.layout.activity_set_daily_caloric_needs);
 	
 		CaloriesDbAdapter.getInstance(this);		
-		caloriesCtrl = new CaloriesCtrlActivity();
+		caloriesCtrl = CaloriesCtrl.getInstance();
 	}
 
 	@Override

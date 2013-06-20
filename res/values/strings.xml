@@ -33,5 +33,8 @@
     <string name="title_activity_display_historic_data">DisplayHistoricDataActivity</string>
     <string name="view_older_data">View Older Data</string>
     <string name="title_activity_display_older_data">DisplayOlderDataActivity</string>
+    <string name="title_activity_display_monthly_data">DisplayMonthlyDataActivity</string>
+    <string name="view_graph_representation">View graph representation</string>
+    <string name="view_month_data">View month data</string>
 
 </resources>
