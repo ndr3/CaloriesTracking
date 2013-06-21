@@ -21,17 +21,22 @@ public class CaloriesDbAdapter extends Activity {
 	private static final String KEY_CALORIES = "calories_no";
 	private static final String KEY_CALORIC_NEED = "caloric_need";
 	private static final String KEY_EATEN_DATE = "eaten_date";
+	private static final String KEY_NAME = "name";
+	private static final String KEY_BARCODE = "barcode";
+			
 	
 	private static final String TAG = "CaloriesDbAdapter";
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase db;
 
 	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date long )";
-	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement,  caloric_need integer)";
+	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement, caloric_need integer)";
+	private static final String CREATE_PRODUCTS_TABLE = "CREATE TABLE IF NOT EXISTS products (_id integer primary key autoincrement, name string not null, calories_no integer not null, barcode string)";
 	
-	private static final String DATABASE_NAME = "CaloriesDB";
+	private static final String DATABASE_NAME = "CaloriesDB2";
 	private static final String DATABASE_CALORIES_TABLE = "calories";
 	private static final String DATABASE_USERS_TABLE = "users";
+	private static final String DATABASE_PRODUCTS_TABLE = "products";
 	private static final int DATABASE_VERSION = 2;
 	
 	private final Context ctx;
@@ -56,6 +61,7 @@ public class CaloriesDbAdapter extends Activity {
 			try {
 				db.execSQL(CREATE_CALORIES_TABLE);
 				db.execSQL(CREATE_USERS_TABLE);
+				db.execSQL(CREATE_PRODUCTS_TABLE);
 				
 				db.setTransactionSuccessful();
 			}finally {
@@ -69,6 +75,7 @@ public class CaloriesDbAdapter extends Activity {
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS calories");
             db.execSQL("DROP TABLE IF EXISTS users");
+            db.execSQL("DROP TABLE IF EXISTS products");
             onCreate(db);
         }
 	}
@@ -92,7 +99,8 @@ public class CaloriesDbAdapter extends Activity {
 			dbHelper = DatabaseHelper.getInstance(ctx);					
 			db = dbHelper.getWritableDatabase();
 			
-			
+			addProduct("Product1", 350, "codebar1");
+			addProduct("Product2", 100, null);
 			
 //			ContentValues values = new ContentValues();
 //			Calendar rightNow = Calendar.getInstance();
@@ -114,10 +122,6 @@ public class CaloriesDbAdapter extends Activity {
 		} 
 	}
 	
-	public void close() {
-		dbHelper.close();
-	}
-	
 	public long addCalories(int calories) {
 		ContentValues values = new ContentValues();
 		Calendar rightNow = Calendar.getInstance();
@@ -128,6 +132,38 @@ public class CaloriesDbAdapter extends Activity {
 		return db.insert(DATABASE_CALORIES_TABLE, null, values);
 	}
 	
+	public long addProduct(String name, int calories, String barcode) {
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, name);
+		values.put(KEY_CALORIES, calories);
+		values.put(KEY_BARCODE, barcode);
+		
+		return db.insert(DATABASE_PRODUCTS_TABLE, null, values);
+	}
+
+	public long setCaloricNeeds(int caloricNeeds) {
+		String strFilter = "_id=1";
+		ContentValues values = new ContentValues();
+		values.put(KEY_CALORIC_NEED, caloricNeeds);
+		
+		Cursor c = db.rawQuery("SELECT COUNT(*) FROM users", null);
+		if (c != null) {
+			c.moveToFirst();
+			if (c.getInt(0) == 0) {
+				//table is empty -> insert values
+				return db.insert(DATABASE_USERS_TABLE, null, values);
+			} else { //update values
+				return db.update(DATABASE_USERS_TABLE, values, strFilter, null);
+			}			
+		}
+		
+		return 0;
+	}
+	
+	public Cursor fetchAllCalories() {
+		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, null, null, null, null);
+	}
+
 	@SuppressWarnings("deprecation")
 	public int fetchTodayCalories() {	
 		//compute the miliseconds that passed since yesterday
@@ -152,29 +188,6 @@ public class CaloriesDbAdapter extends Activity {
 			
 	}
 	
-	public Cursor fetchAllCalories() {
-		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, null, null, null, null);
-	}
-	
-	public long setCaloricNeeds(int caloricNeeds) {
-		String strFilter = "_id=1";
-		ContentValues values = new ContentValues();
-		values.put(KEY_CALORIC_NEED, caloricNeeds);
-		
-		Cursor c = db.rawQuery("SELECT COUNT(*) FROM users", null);
-		if (c != null) {
-			c.moveToFirst();
-			if (c.getInt(0) == 0) {
-				//table is empty -> insert values
-				return db.insert(DATABASE_USERS_TABLE, null, values);
-			} else { //update values
-				return db.update(DATABASE_USERS_TABLE, values, strFilter, null);
-			}			
-		}
-		
-		return 0;
-	}
-
 	public int fetchCaloricNeeds() {
 		try {
 		Cursor caloricNeedsCursor = db.query(DATABASE_USERS_TABLE, new String[] {KEY_CALORIC_NEED}, null, null, null, null, null);
@@ -269,6 +282,9 @@ public class CaloriesDbAdapter extends Activity {
 	public void deleteCaloriesTable() {
 		db.execSQL("drop table calories");
 	}
-
+	
+	public void close() {
+		dbHelper.close();
+	}
 }
 
