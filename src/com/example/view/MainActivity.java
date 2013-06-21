@@ -1,7 +1,5 @@
 package com.example.view;
 
-import com.example.view.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +7,20 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.ctrl.CaloriesCtrl;
+import com.example.utils.CaloriesDbAdapter;
+
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.view.MESSAGE"; 
+	public CaloriesCtrl caloriesCtrl;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		CaloriesDbAdapter.getInstance(this);
+		caloriesCtrl = CaloriesCtrl.getInstance();		
 	}
 
 	@Override
@@ -42,4 +47,9 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, com.example.view.DisplayHistoricDataActivity.class);
 		startActivity(intent);
 	}
+	
+//	public void onDestroy() {
+//		System.out.println("Closing DB connection");
+//		caloriesCtrl.closeDBConnection();
+//	}
 }

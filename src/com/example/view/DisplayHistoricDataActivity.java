@@ -6,10 +6,8 @@ import com.example.utils.CaloriesDbAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
 
 public class DisplayHistoricDataActivity extends Activity {
 	CaloriesCtrl caloriesCtrl;
@@ -18,30 +16,24 @@ public class DisplayHistoricDataActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_historic_data);
-		
-		CaloriesDbAdapter.getInstance(this);			
+					
 		caloriesCtrl = CaloriesCtrl.getInstance();
 		@SuppressWarnings("unused")
 		Intent intent = getIntent();
-		
-		TextView caloricNeedsTextView = (TextView) findViewById(R.id.historic_caloric_needs_textView);
-		caloricNeedsTextView.setTextSize(18);
-		caloricNeedsTextView.setTextColor(Color.rgb(45, 100, 180));
-		caloricNeedsTextView.setText("Your daily caloric needs are: " + caloriesCtrl.getCaloricNeeds() + " kcal");
-		
-		TextView totalCaloriesTextView = (TextView) findViewById(R.id.historic_total_calories_textView);
-		totalCaloriesTextView.setTextSize(18);
-		totalCaloriesTextView.setTextColor(Color.rgb(45, 100, 180));
-		totalCaloriesTextView.setText("Today consumed calories: " + caloriesCtrl.getTodayCalories() + " kcal");
-		
-		TextView remainingCaloriesTextView = (TextView) findViewById(R.id.historic_remaining_calories_textView);
-		remainingCaloriesTextView.setTextSize(18);
-		remainingCaloriesTextView.setTextColor(Color.rgb(45, 100, 180));
-		remainingCaloriesTextView.setText("Remaining calories: " + caloriesCtrl.getRemainingCalories() + " kcal");
 	}
 
-	public void viewOlderData(View view) { 
-		Intent intent = new Intent(this, com.example.view.DisplayOlderDataActivity.class);
+	public void viewTodayData(View view) { 
+		Intent intent = new Intent(this, com.example.view.DisplayTodayDataActivity.class);
+		startActivity(intent);
+	}
+	
+	public void viewWeekData(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayWeekDataActivity.class);
+		startActivity(intent);
+	}
+	
+	public void viewMonthData(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayMonthDataActivity.class);
 		startActivity(intent);
 	}
 	

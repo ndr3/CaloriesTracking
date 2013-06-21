@@ -51,12 +51,20 @@
             android:label="@string/title_activity_display_older_data" >
         </activity>
         <activity
-            android:name="com.example.view.DisplayMonthlyDataActivity"
+            android:name="com.example.view.DisplayMonthDataActivity"
             android:label="@string/title_activity_display_monthly_data" >
         </activity>
         <activity
             android:name="com.example.view.DisplayGraphActivity"
             android:label="@string/title_activity_display_graph" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayTodayDataActivity"
+            android:label="@string/title_activity_display_today_data" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayWeekDataActivity"
+            android:label="@string/title_activity_display_week_data" >
         </activity>
     </application>
 

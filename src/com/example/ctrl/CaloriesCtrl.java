@@ -1,5 +1,7 @@
 package com.example.ctrl;
 
+import java.util.ArrayList;
+
 import com.example.model.CaloriesInfo;
 import com.example.utils.CaloriesDbAdapter;
 
@@ -103,5 +105,13 @@ public class CaloriesCtrl {
 	
 	public String getMonthData() {
 		return caloriesDbAdapter.fetchMonthData();
+	}
+	
+	public ArrayList<Integer> getThisWeekCalories() {
+		return caloriesDbAdapter.fetchThisWeekCalories();
+	}
+	
+	public void closeDBConnection() {
+		caloriesDbAdapter.close();
 	}
 }

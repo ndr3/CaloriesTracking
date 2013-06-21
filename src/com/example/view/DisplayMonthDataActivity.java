@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.ctrl.CaloriesCtrl;
 
-public class DisplayMonthlyDataActivity extends Activity {
+public class DisplayMonthDataActivity extends Activity {
 	CaloriesCtrl caloriesCtrl;
 	
 	@Override

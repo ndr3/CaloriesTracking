@@ -20,7 +20,6 @@ public class SetDailyCaloricNeedsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_set_daily_caloric_needs);
 	
-		CaloriesDbAdapter.getInstance(this);		
 		caloriesCtrl = CaloriesCtrl.getInstance();
 	}
 

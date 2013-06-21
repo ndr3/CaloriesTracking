@@ -6,34 +6,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".DisplayMonthDataActivity" >
+    tools:context=".DisplayTodayDataActivity" >
 
-    <TextView
-        android:id="@+id/month_data_textview"
+	<TextView
+        android:id="@+id/historic_total_calories_textView"
         android:textIsSelectable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/historic_caloric_needs_textView"
+        android:layout_below="@+id/historic_caloric_needs_textView"
+        android:layout_marginTop="59dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/month_days_textview"
+        android:id="@+id/historic_caloric_needs_textView"
         android:textIsSelectable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/month_data_textview"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="30dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="41dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/historic_remaining_calories_textView"
+        android:textIsSelectable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/view_graph_representation" />
+        android:layout_alignLeft="@+id/historic_total_calories_textView"
+        android:layout_below="@+id/historic_total_calories_textView"
+        android:layout_marginTop="74dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

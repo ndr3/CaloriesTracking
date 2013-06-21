@@ -37,5 +37,11 @@
     <string name="view_graph_representation">View graph representation</string>
     <string name="view_month_data">View month data</string>
     <string name="title_activity_display_graph">DisplayGraphActivity</string>
+    <string name="title_activity_display_today_data">DisplayTodayDataActivity</string>
+    <string name="title_activity_display_week_data">DisplayWeekDataActivity</string>
+    <string name="view_today_data">View today data</string>
+    <string name="view_week_data">View week data</string>
+    <string name="view_month_data">View month data</string>
+    
 
 </resources>

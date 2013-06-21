@@ -8,45 +8,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DisplayHistoricDataActivity" >
 
-    <TextView
-        android:id="@+id/historic_total_calories_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/historic_caloric_needs_textView"
-        android:layout_below="@+id/historic_caloric_needs_textView"
-        android:layout_marginTop="59dp"
-        android:text="test"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+     <Button
+         android:id="@+id/historic_viewTodayData"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginLeft="60dp"
+         android:layout_marginTop="60dp"
+         android:onClick="viewTodayData"
+         android:text="@string/view_today_data" />
 
-    <TextView
-        android:id="@+id/historic_caloric_needs_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="41dp"
-        android:text="test"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+     <Button
+         android:id="@+id/historic_viewWeekData"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/historic_viewTodayData"
+         android:layout_below="@+id/historic_viewTodayData"
+         android:layout_marginTop="70dp"
+         android:onClick="viewWeekData"
+         android:text="@string/view_week_data" />
 
-    <TextView
-        android:id="@+id/historic_remaining_calories_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/historic_total_calories_textView"
-        android:layout_below="@+id/historic_total_calories_textView"
-        android:layout_marginTop="74dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/historic_viewOlderData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="viewOlderData"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
-        android:text="@string/view_older_data" />
+     <Button
+         android:id="@+id/historic_viewMonthData"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/historic_viewWeekData"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="75dp"
+         android:onClick="viewMonthData"
+         android:text="@string/view_month_data" />
     
 </RelativeLayout>
