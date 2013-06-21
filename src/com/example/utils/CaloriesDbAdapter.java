@@ -92,6 +92,18 @@ public class CaloriesDbAdapter extends Activity {
 			dbHelper = DatabaseHelper.getInstance(ctx);					
 			db = dbHelper.getWritableDatabase();
 			
+			
+//			
+//			ContentValues values = new ContentValues();
+//			Calendar rightNow = Calendar.getInstance();
+//			long timestamp = rightNow.getTimeInMillis();
+//			values.put(KEY_EATEN_DATE, timestamp - 96*60*60*1000);
+//			values.put(KEY_CALORIES, 500);
+//			
+//			db.insert(DATABASE_CALORIES_TABLE, null, values);
+			
+			
+			
 			return this;
 		} catch (NullPointerException e) {
 			System.out.println("CaloriesDbAdapter/Open null pointer exception");
@@ -295,7 +307,7 @@ public class CaloriesDbAdapter extends Activity {
 		caloriesList.add(fetchTodayCalories());
 		
 		Calendar calendar = Calendar.getInstance();
-		int dayOfTheMonth = calendar.get(Calendar.DAY_OF_MONTH);
+		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		
 		Date d = new Date();
 		int hours = d.getHours() + 3;
@@ -310,7 +322,7 @@ public class CaloriesDbAdapter extends Activity {
 		int passedDays = 1;		
 		int dailyCalories = 0;
 		
-		for (int i = dayOfTheMonth - 1; i > 0; i--) {
+		for (int i = dayOfTheWeek - 1; i > 0; i--) {
 			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
 			caloriesList.add(dailyCalories);
 			passedDays++;

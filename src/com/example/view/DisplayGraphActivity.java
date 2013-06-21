@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.ctrl.CaloriesCtrl;
+import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
@@ -11,6 +12,7 @@ import com.jjoe64.graphview.GraphView.GraphViewData;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.Menu;
 import android.widget.LinearLayout;
 
@@ -25,61 +27,53 @@ public class DisplayGraphActivity extends Activity {
 		caloriesCtrl = CaloriesCtrl.getInstance();
 
 		//Advanced graph
-		// draw sin curve
-//		int num = 150;
-//		GraphViewData[] data = new GraphViewData[num];
-//		double v=0;
-//		for (int i=0; i<num; i++) {
-//			v += 0.2;
-//			data[i] = new GraphViewData(i, Math.sin(v));
-//		}
-		// graph with dynamically genereated horizontal and vertical labels
-		GraphView graphView;
 
-			graphView = new LineGraphView(
-					this
-					, "GraphView"
-			);
-			
-		
-//		final String[] xLabels = new String[] {
-//				  "foo", "bar", "third", "bla", "more", "more2", "more3", "more4", "more5"
-//				};
-//				graphView = new LineGraphView(this, "example") {
-//				   @Override
-//				   protected String formatLabel(double value, boolean isValueX) {
-//				      if (isValueX) {
-//				         return xLabels[(int) value];
-//				      } else {
-//				         // return y label as number
-//				         return super.formatLabel(value, isValueX); // let the y-value be normal-formatted
-//				      }
-//				   }
-//				};
-		
+		GraphView graphView;
+		ArrayList<Integer> thisWeekCalories = caloriesCtrl.getThisWeekCalories();
 		
 		Calendar calendar = Calendar.getInstance();
-		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;		
 		
-		
-		
-		GraphViewData[] data = new GraphViewData[dayOfTheWeek];
-//		data[0] = new GraphViewData(caloriesCtrl.getTodayCalories());
-			
-		ArrayList<Integer> thisWeekCalories = caloriesCtrl.getThisWeekCalories();
-
-		for (int i = 0; i < thisWeekCalories.size(); i++ ) {
-			data[i] = new GraphViewData(i, thisWeekCalories.get(dayOfTheWeek - i - 1));
+		int num = 5;
+		GraphViewData[] data = new GraphViewData[num];
+		double v=0;
+		for (int i=0; i<num; i++) {
+			v += 0.2;
+			System.out.println("Math ==== " + Math.sin(v));
+			data[i] = new GraphViewData(i, 1000); //thisWeekCalories.get(dayOfTheWeek - i - 1));
 		}
-		
+		// graph with dynamically genereated horizontal and vertical labels
 			
-		//}
+	    graphView = new LineGraphView(this, "example"); //{  
+//	        @Override  
+//	        protected String formatLabel(double value, boolean isValueX) {  
+//	           if (!isValueX) {  
+//	              // convert unix time to human time  
+//	              return String.valueOf(value/1000.0);  
+//	           } else return super.formatLabel(value, isValueX); // let the y-value be normal-formatted  
+//	        }  
+//	     };  
+//		
+//		Calendar calendar = Calendar.getInstance();
+//		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;		
+//		
+//		GraphViewData[] data = new GraphViewData[dayOfTheWeek];			
+//		ArrayList<Integer> thisWeekCalories = caloriesCtrl.getThisWeekCalories();
+//
+//		for (int i = 0; i < thisWeekCalories.size(); i++ ) {
+//			System.out.println("-- new point " + thisWeekCalories.get(dayOfTheWeek - i - 1) + " " + i);
+//			data[i] = new GraphViewData(thisWeekCalories.get(dayOfTheWeek - i - 1), i);
+//		}
+		
+		//graphView.setHorizontalLabels( new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"});
+		
 		// add data
 		graphView.addSeries(new GraphViewSeries(data));
 		// set view port, start=2, size=40
-		graphView.setViewPort(2, 40);
+		graphView.setViewPort(0, 4);
 		graphView.setScrollable(true);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+		layout.setBackgroundColor(Color.BLACK);
 		layout.addView(graphView);
 	}
 	
