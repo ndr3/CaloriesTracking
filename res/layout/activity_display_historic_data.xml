@@ -12,10 +12,9 @@
          android:id="@+id/historic_viewTodayData"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
          android:layout_alignParentTop="true"
-         android:layout_marginLeft="60dp"
-         android:layout_marginTop="60dp"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="24dp"
          android:onClick="viewTodayData"
          android:text="@string/view_today_data" />
 
@@ -23,9 +22,8 @@
          android:id="@+id/historic_viewWeekData"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/historic_viewTodayData"
+         android:layout_alignRight="@+id/historic_viewTodayData"
          android:layout_below="@+id/historic_viewTodayData"
-         android:layout_marginTop="70dp"
          android:onClick="viewWeekData"
          android:text="@string/view_week_data" />
 
@@ -35,8 +33,34 @@
          android:layout_height="wrap_content"
          android:layout_below="@+id/historic_viewWeekData"
          android:layout_centerHorizontal="true"
-         android:layout_marginTop="75dp"
          android:onClick="viewMonthData"
          android:text="@string/view_month_data" />
+
+     <RadioButton
+         android:id="@+id/lineGraphRadioButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/button1"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="16dp"
+         android:text="@string/line_graph_radioButton" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="40dp"
+         android:onClick="viewGraph"
+         android:text="@string/view_graph_representation" />
+
+     <RadioButton
+         android:id="@+id/barGraphRadioButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/lineGraphRadioButton"
+         android:layout_centerHorizontal="true"
+         android:text="@string/bar_graph_radioButton" />
     
 </RelativeLayout>

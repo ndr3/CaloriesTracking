@@ -45,10 +45,5 @@ public class DisplayWeekDataActivity extends Activity {
 		getMenuInflater().inflate(R.menu.display_week_data, menu);
 		return true;
 	}
-	
-	public void viewGraph(View view) {
-		Intent intent = new Intent(this, com.example.view.DisplayGraphActivity.class);
-		startActivity(intent);
-	}
 
 }

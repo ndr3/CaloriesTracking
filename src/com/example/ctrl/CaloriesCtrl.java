@@ -111,6 +111,10 @@ public class CaloriesCtrl {
 		return caloriesDbAdapter.fetchThisWeekCalories();
 	}
 	
+	public ArrayList<Integer> getThisMonthCalories() {
+		return caloriesDbAdapter.fetchThisMonthCalories();
+	}
+	
 	public void closeDBConnection() {
 		caloriesDbAdapter.close();
 	}

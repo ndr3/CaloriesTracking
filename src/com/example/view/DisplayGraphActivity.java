@@ -26,7 +26,7 @@ public class DisplayGraphActivity extends Activity {
 		
 		caloriesCtrl = CaloriesCtrl.getInstance();
 
-		//Advanced graph
+		//Week calories graph
 
 		GraphView graphView;
 		ArrayList<Integer> thisWeekCalories = caloriesCtrl.getThisWeekCalories();
@@ -34,45 +34,69 @@ public class DisplayGraphActivity extends Activity {
 		Calendar calendar = Calendar.getInstance();
 		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;		
 		
-		int num = 5;
-		GraphViewData[] data = new GraphViewData[num];
-		double v=0;
-		for (int i=0; i<num; i++) {
-			v += 0.2;
-			System.out.println("Math ==== " + Math.sin(v));
-			data[i] = new GraphViewData(i, 1000); //thisWeekCalories.get(dayOfTheWeek - i - 1));
+		GraphViewData[] data = new GraphViewData[dayOfTheWeek];
+		for (int i=0; i<dayOfTheWeek; i++) {
+			data[i] = new GraphViewData(i, thisWeekCalories.get(dayOfTheWeek - i - 1));
 		}
-		// graph with dynamically genereated horizontal and vertical labels
-			
-	    graphView = new LineGraphView(this, "example"); //{  
-//	        @Override  
-//	        protected String formatLabel(double value, boolean isValueX) {  
-//	           if (!isValueX) {  
-//	              // convert unix time to human time  
-//	              return String.valueOf(value/1000.0);  
-//	           } else return super.formatLabel(value, isValueX); // let the y-value be normal-formatted  
-//	        }  
-//	     };  
-//		
-//		Calendar calendar = Calendar.getInstance();
-//		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;		
-//		
-//		GraphViewData[] data = new GraphViewData[dayOfTheWeek];			
-//		ArrayList<Integer> thisWeekCalories = caloriesCtrl.getThisWeekCalories();
-//
-//		for (int i = 0; i < thisWeekCalories.size(); i++ ) {
-//			System.out.println("-- new point " + thisWeekCalories.get(dayOfTheWeek - i - 1) + " " + i);
-//			data[i] = new GraphViewData(thisWeekCalories.get(dayOfTheWeek - i - 1), i);
-//		}
 		
-		//graphView.setHorizontalLabels( new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"});
-		
-		// add data
+	    String[] weekDays = new  String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+	    String[] currentWeekDays = new String[dayOfTheWeek];
+	    for (int i = 0; i < dayOfTheWeek; i++) {
+	    	currentWeekDays[i] = weekDays[i];
+	    }
+	    
+	    if (getIntent().getStringExtra("type").equals("bar")) {
+			graphView = new BarGraphView(
+					this
+					, "This week"
+			);
+		} else {
+			graphView = new LineGraphView(
+					this
+					,  "This week"
+			);
+		}    
+	    graphView.setHorizontalLabels(currentWeekDays);
 		graphView.addSeries(new GraphViewSeries(data));
-		// set view port, start=2, size=40
-		graphView.setViewPort(0, 4);
+		graphView.setViewPort(0, dayOfTheWeek - 1);
 		graphView.setScrollable(true);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+		layout.setBackgroundColor(Color.BLACK);
+		layout.addView(graphView);
+		
+		
+		//Month calories graph
+		ArrayList<Integer> thisMonthCalories = caloriesCtrl.getThisMonthCalories();
+		int dayOfTheMonth = calendar.get(Calendar.DAY_OF_MONTH);	
+		
+		data = new GraphViewData[dayOfTheMonth];
+		for (int i=0; i<dayOfTheMonth; i++) {
+			data[i] = new GraphViewData(i, thisMonthCalories.get(dayOfTheMonth - i - 1));
+		}				
+		
+		String[] currentMonthDays = new String[dayOfTheMonth];
+	    for (int i = 0; i < dayOfTheMonth; i++) {
+	    	currentMonthDays[i] = String.valueOf(i + 1);
+	    }
+		
+	    if (getIntent().getStringExtra("type").equals("bar")) {
+			graphView = new BarGraphView(
+					this
+					, "This month"
+			);
+		} else {
+			graphView = new LineGraphView(
+					this
+					, "This month"
+			);
+			((LineGraphView) graphView).setDrawBackground(true);
+		}
+
+		graphView.setHorizontalLabels(currentMonthDays);
+		graphView.addSeries(new GraphViewSeries(data));
+		graphView.setViewPort(0, dayOfTheMonth - 1);
+		graphView.setScalable(true);
+		layout = (LinearLayout) findViewById(R.id.graph2);
 		layout.setBackgroundColor(Color.BLACK);
 		layout.addView(graphView);
 	}

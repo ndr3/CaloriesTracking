@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class DisplayHistoricDataActivity extends Activity {
 	CaloriesCtrl caloriesCtrl;
@@ -34,6 +36,18 @@ public class DisplayHistoricDataActivity extends Activity {
 	
 	public void viewMonthData(View view) {
 		Intent intent = new Intent(this, com.example.view.DisplayMonthDataActivity.class);
+		startActivity(intent);
+	}
+	
+	public void viewGraph(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayGraphActivity.class);
+		
+		if (((RadioButton) findViewById(R.id.barGraphRadioButton)).isChecked()) {
+			intent.putExtra("type", "bar");
+		} else {
+			intent.putExtra("type", "line");
+		}
+		
 		startActivity(intent);
 	}
 	

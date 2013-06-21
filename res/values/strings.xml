@@ -42,6 +42,7 @@
     <string name="view_today_data">View today data</string>
     <string name="view_week_data">View week data</string>
     <string name="view_month_data">View month data</string>
-    
+    <string name="line_graph_radioButton">Line graph</string>
+    <string name="bar_graph_radioButton">Bar graph</string>
 
 </resources>
