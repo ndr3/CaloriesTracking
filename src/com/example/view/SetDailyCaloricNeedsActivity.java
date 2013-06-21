@@ -1,6 +1,5 @@
 package com.example.view;
 
-import com.example.utils.CaloriesDbAdapter;
 import com.example.view.R;
 import com.example.ctrl.CaloriesCtrl;
 

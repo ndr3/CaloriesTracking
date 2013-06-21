@@ -1,7 +1,6 @@
 package com.example.view;
 
 import com.example.ctrl.CaloriesCtrl;
-import com.example.utils.CaloriesDbAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 public class DisplayHistoricDataActivity extends Activity {
 	CaloriesCtrl caloriesCtrl;

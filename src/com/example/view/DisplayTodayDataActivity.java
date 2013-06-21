@@ -1,7 +1,6 @@
 package com.example.view;
 
 import com.example.ctrl.CaloriesCtrl;
-import com.example.utils.CaloriesDbAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;

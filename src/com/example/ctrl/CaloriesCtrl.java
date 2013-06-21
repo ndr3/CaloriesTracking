@@ -99,14 +99,6 @@ public class CaloriesCtrl {
 		}
 	}
 	
-	public String getWeekData() {
-		return caloriesDbAdapter.fetchWeekData();
-	}
-	
-	public String getMonthData() {
-		return caloriesDbAdapter.fetchMonthData();
-	}
-	
 	public ArrayList<Integer> getThisWeekCalories() {
 		return caloriesDbAdapter.fetchThisWeekCalories();
 	}

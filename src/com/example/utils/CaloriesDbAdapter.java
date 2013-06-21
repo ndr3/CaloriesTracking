@@ -94,13 +94,13 @@ public class CaloriesDbAdapter extends Activity {
 			
 			
 			
-			ContentValues values = new ContentValues();
-			Calendar rightNow = Calendar.getInstance();
-			long timestamp = rightNow.getTimeInMillis();
-			values.put(KEY_EATEN_DATE, timestamp - 56*60*60*1000);
-			values.put(KEY_CALORIES, 500);
-			
-			db.insert(DATABASE_CALORIES_TABLE, null, values);
+//			ContentValues values = new ContentValues();
+//			Calendar rightNow = Calendar.getInstance();
+//			long timestamp = rightNow.getTimeInMillis();
+//			values.put(KEY_EATEN_DATE, timestamp - 56*60*60*1000);
+//			values.put(KEY_CALORIES, 500);
+//			
+//			db.insert(DATABASE_CALORIES_TABLE, null, values);
 			
 			
 			
@@ -188,104 +188,6 @@ public class CaloriesDbAdapter extends Activity {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
-	public String fetchWeekData() {
-		//get day of the week
-		Calendar calendar = Calendar.getInstance();
-		int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-		
-		ArrayList<String> weekData = new ArrayList<String>();
-		int totalConsumedCalories = 0;
-		String finalData = "";
-		
-		//get calories for each day
-		//get today calories
-		Date d = new Date();
-		int hours = d.getHours() + 3;
-		int minutes = d.getMinutes();
-		int seconds = d.getSeconds();
-		
-		long todayPassedMilisecs = hours*60*60*1000 + minutes*60*1000 + seconds*1000;
-		long rightNow = calendar.getTimeInMillis();		
-		long begginingOfToday = rightNow - todayPassedMilisecs;
-		
-		String[] days = new String[] {"Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday: ", "Saturday: ", "Sunday: "};
-		long wholeDayInMilisecs = 24*60*60*1000;
-		
-		int todayCalories = fetchTodayCalories();
-		weekData.add(days[dayOfTheWeek - 1] + " " + String.valueOf(todayCalories) + " calories\n");
-		totalConsumedCalories += todayCalories;
-		
-		//get other days calories		
-		int passedDays = 1;		
-		int dailyCalories = 0;
-		
-		for (int i = dayOfTheWeek - 1; i > 0; i--) {
-			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
-			weekData.add(days[dayOfTheWeek - passedDays - 1] + " " + String.valueOf(dailyCalories) + " calories\n");
-			totalConsumedCalories += dailyCalories;
-			passedDays++;
-		}		
-		
-		//order days
-		for(int i = weekData.size() - 1; i >=0; i--) {
-			finalData += weekData.get(i);
-		}
-		
-		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " calories\n";
-		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheWeek + " calories\n";
-		finalData += "Average calories intake per day: " + totalConsumedCalories/dayOfTheWeek + " calories\n";
-		
-		return finalData;
-	}
-	
-	@SuppressWarnings("deprecation")
-	public String fetchMonthData() {
-		ArrayList<String> monthData = new ArrayList<String>();
-		int totalConsumedCalories = 0;
-		String finalData = "";
-		
-		Calendar calendar = Calendar.getInstance();
-		int dayOfTheMonth = calendar.get(Calendar.DAY_OF_MONTH);
-		
-		Date d = new Date();
-		int hours = d.getHours() + 3;
-		int minutes = d.getMinutes();
-		int seconds = d.getSeconds();
-		
-		long todayPassedMilisecs = hours*60*60*1000 + minutes*60*1000 + seconds*1000;
-		long rightNow = calendar.getTimeInMillis();		
-		long begginingOfToday = rightNow - todayPassedMilisecs;
-		
-		long wholeDayInMilisecs = 24*60*60*1000;
-		
-		int todayCalories = fetchTodayCalories();
-		monthData.add("Day " + dayOfTheMonth + ": " + String.valueOf(todayCalories) + " calories\n");
-		totalConsumedCalories += todayCalories;
-		
-		//get other days calories		
-		int passedDays = 1;		
-		int dailyCalories = 0;
-		
-		for (int i = dayOfTheMonth - 1; i > 0; i--) {
-			dailyCalories = fetchDailyCalories(begginingOfToday - wholeDayInMilisecs*passedDays, begginingOfToday - wholeDayInMilisecs*(passedDays - 1));
-			monthData.add("Day " + String.valueOf(dayOfTheMonth - passedDays) + ": " + String.valueOf(dailyCalories) + " calories\n");
-			totalConsumedCalories += dailyCalories;
-			passedDays++;
-		}		
-		
-		//order days
-		for(int i = monthData.size() - 1; i >=0; i--) {
-			finalData += monthData.get(i);
-		}
-		
-		finalData += "\nTotal consumed calories: " + totalConsumedCalories + " calories\n";
-		finalData += "From total caloric needs: " + fetchCaloricNeeds()*dayOfTheMonth + " calories\n";
-		finalData += "Average calories intake per day: " + totalConsumedCalories/dayOfTheMonth + " calories\n";
-		
-		return finalData;
-	}
-	
 	public int fetchDailyCalories(long begin, long end) {
 		int consumedCalories = 0;
 		try {
@@ -301,6 +203,7 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	@SuppressWarnings("deprecation")
+	//retrieve calories in reverse order of days
 	public ArrayList<Integer> fetchThisWeekCalories() {
 		ArrayList<Integer> caloriesList = new ArrayList<Integer>();
 		
@@ -331,10 +234,12 @@ public class CaloriesDbAdapter extends Activity {
 		return caloriesList;
 	}
 	
+	@SuppressWarnings("deprecation")
+	//retrieve calories in reverse order of days
 	public ArrayList<Integer> fetchThisMonthCalories() {
 		ArrayList<Integer> caloriesList = new ArrayList<Integer>();
 		
-caloriesList.add(fetchTodayCalories());
+		caloriesList.add(fetchTodayCalories());
 		
 		Calendar calendar = Calendar.getInstance();
 		int dayOfTheMonth = calendar.get(Calendar.DAY_OF_MONTH);
