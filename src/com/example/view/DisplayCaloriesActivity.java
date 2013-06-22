@@ -30,7 +30,9 @@ public class DisplayCaloriesActivity extends Activity{
 
 			//add calories to DB			
 			try {
-				caloriesCtrl.addCalories(calories);
+				if (caloriesCtrl.addCalories(calories) == -1) {
+					System.out.println("Failure when adding calories!");
+				}
 			} catch (NullPointerException e) {
 				System.out.println("DisplayCaloriesActivity/OnCreate null pointer exception");
 			} catch (Exception ex) {

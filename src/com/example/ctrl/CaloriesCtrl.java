@@ -55,14 +55,19 @@ public class CaloriesCtrl {
 		
 	}
 	
-	public void addCalories(int calories) {		
+	public long addCalories(int calories) {		
 		try {
 			caloriesInfo.addCalories(calories);
-			caloriesDbAdapter.addCalories(calories);		
+			return caloriesDbAdapter.addCalories(calories);		
 		} catch (Exception e) {
 			System.out.println("Ctrl/getCalories exception");
 			e.printStackTrace();
+			return 0;
 		}
+	}
+	
+	public long addProduct(String name, int calories, String barcode) {
+		return caloriesDbAdapter.addProduct(name, calories, barcode);
 	}
 	
 	public int getTodayCalories() {

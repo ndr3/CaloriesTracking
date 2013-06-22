@@ -66,6 +66,14 @@
             android:name="com.example.view.DisplayWeekDataActivity"
             android:label="@string/title_activity_display_week_data" >
         </activity>
+        <activity
+            android:name="com.example.view.DisplayProductsActivity"
+            android:label="@string/title_activity_display_products" >
+        </activity>
+        <activity
+            android:name="com.example.view.AddProductActivity"
+            android:label="@string/title_activity_add_productctivity" >
+        </activity>
     </application>
 
 </manifest>

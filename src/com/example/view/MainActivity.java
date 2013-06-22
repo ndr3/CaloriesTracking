@@ -48,8 +48,13 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
-//	public void onDestroy() {
-//		System.out.println("Closing DB connection");
-//		caloriesCtrl.closeDBConnection();
-//	}
+	public void viewProducts(View view) {
+		Intent intent = new Intent(this, com.example.view.DisplayProductsActivity.class);
+		startActivity(intent);
+	}
+	
+	public void onDestroy() {
+		System.out.println("Closing DB connection");
+		caloriesCtrl.closeDBConnection();
+	}
 }

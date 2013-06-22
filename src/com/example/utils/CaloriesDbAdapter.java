@@ -99,8 +99,8 @@ public class CaloriesDbAdapter extends Activity {
 			dbHelper = DatabaseHelper.getInstance(ctx);					
 			db = dbHelper.getWritableDatabase();
 			
-			addProduct("Product1", 350, "codebar1");
-			addProduct("Product2", 100, null);
+//			addProduct("Product1", 350, "codebar1");
+//			addProduct("Product2", 100, null);
 			
 //			ContentValues values = new ContentValues();
 //			Calendar rightNow = Calendar.getInstance();
