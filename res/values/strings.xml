@@ -50,8 +50,9 @@
     <string name="view_products">View product list</string>
     <string name="add_product">Add product</string>
     <string name="title_activity_add_productctivity">AddProductctivity</string>
-	<string name="insert_product">Insert product</string>
-	<string name="name">Name</string>
-	<string name="calories_number">Number of calories</string>
-    
+    <string name="insert_product">Insert product</string>
+    <string name="name">Name</string>
+    <string name="calories_number">Number of calories</string>
+    <string name="title_activity_display_product_list">DisplayProductListActivity</string>
+
 </resources>

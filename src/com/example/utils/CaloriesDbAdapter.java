@@ -3,6 +3,7 @@ package com.example.utils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -101,6 +102,10 @@ public class CaloriesDbAdapter extends Activity {
 			
 //			addProduct("Product1", 350, "codebar1");
 //			addProduct("Product2", 100, null);
+//			addProduct("Product1", 350, "codebar1");
+//			addProduct("Product3", 100, null);
+//			addProduct("Product4", 350, "codebar1");
+//			addProduct("Product5", 100, null);
 			
 //			ContentValues values = new ContentValues();
 //			Calendar rightNow = Calendar.getInstance();
@@ -277,6 +282,16 @@ public class CaloriesDbAdapter extends Activity {
 		}		
 		
 		return caloriesList;
+	}
+	
+	public ArrayList<String> fetchAllProductsWithCalories() {
+		ArrayList<String> allProductsWithCalories = new ArrayList<String>();
+		
+		Cursor allProductsWithCaloriesCursor = db.rawQuery("SELECT * FROM products", new String[] {});
+		for (allProductsWithCaloriesCursor.moveToFirst(); !allProductsWithCaloriesCursor.isAfterLast(); allProductsWithCaloriesCursor.moveToNext())
+			allProductsWithCalories.add(allProductsWithCaloriesCursor.getString(1) + " : " +  allProductsWithCaloriesCursor.getInt(2));//+  String.valueOf(allProductsWithCaloriesCursor.getInt(3)));
+		
+		return allProductsWithCalories;
 	}
 
 	public void deleteCaloriesTable() {

@@ -49,7 +49,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void viewProducts(View view) {
-		Intent intent = new Intent(this, com.example.view.DisplayProductsActivity.class);
+		//Intent intent = new Intent(this, com.example.view.DisplayProductsActivity.class);
+		Intent intent = new Intent(this, com.example.view.DisplayProductListActivity.class);
 		startActivity(intent);
 	}
 	

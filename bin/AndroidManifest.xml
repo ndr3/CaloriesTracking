@@ -74,6 +74,10 @@
             android:name="com.example.view.AddProductActivity"
             android:label="@string/title_activity_add_productctivity" >
         </activity>
+        <activity
+            android:name="com.example.view.DisplayProductListActivity"
+            android:label="@string/title_activity_display_product_list" >
+        </activity>
     </application>
 
 </manifest>

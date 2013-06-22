@@ -8,13 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DisplayProductsActivity" >
 
-    <TextView
+    <!--  <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/all_products"
-        android:textSize="22sp" />
+        android:textSize="22sp" /> -->
 
     <Button
         android:id="@+id/button1"
@@ -25,5 +25,22 @@
         android:layout_marginBottom="28dp"
         android:onClick="addProduct"
         android:text="@string/add_product" />
+
+	<TextView
+	    android:id="@+id/list"
+	    android:textIsSelectable="true"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:padding="10dp"
+	    android:textSize="20sp" >
+	</TextView>
+	
+	 <ListView android:id="@android:id/list"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="#00FF00"
+               android:layout_weight="1"
+               android:drawSelectorOnTop="false"/>
+	
 
 </RelativeLayout>
