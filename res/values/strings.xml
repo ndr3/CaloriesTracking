@@ -54,5 +54,6 @@
     <string name="name">Name</string>
     <string name="calories_number">Number of calories</string>
     <string name="title_activity_display_product_list">DisplayProductListActivity</string>
+    <string name="title_activity_manage_products">ManageProductsActivity</string>
 
 </resources>

@@ -27,6 +27,7 @@ public class DisplayCaloriesActivity extends Activity{
 			
 			Intent intent = getIntent();
 			int calories = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
+			int productID = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE2));
 
 			//add calories to DB			
 			try {

@@ -16,10 +16,6 @@ import android.widget.Toast;
 
 public class DisplayProductListActivity extends ListActivity {
 	public CaloriesCtrl caloriesCtrl;
-	
-	static final String[] FRUITS = new String[] { "Apple", "Avocado", "Banana",
-		"Blueberry", "Coconut", "Durian", "Guava", "Kiwifruit",
-		"Jackfruit", "Mango", "Olive", "Pear", "Sugar-apple" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -12,6 +12,7 @@ import com.example.utils.CaloriesDbAdapter;
 
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE = "com.example.view.MESSAGE"; 
+	public final static String EXTRA_MESSAGE2 = "com.example.view.MESSAGE2"; 
 	public CaloriesCtrl caloriesCtrl;
 		
 	@Override
@@ -34,7 +35,12 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, com.example.view.DisplayCaloriesActivity.class);
 		EditText editText = (EditText) findViewById(R.id.add_message_edittext);
 		String message = editText.getText().toString();
+		
+		EditText editText2 = (EditText) findViewById(R.id.editText1);
+		String message2 = editText.getText().toString();
+		
 		intent.putExtra(EXTRA_MESSAGE, message);
+		intent.putExtra(EXTRA_MESSAGE2, message2);
 		startActivity(intent);
 	}
 	
@@ -51,6 +57,11 @@ public class MainActivity extends Activity {
 	public void viewProducts(View view) {
 		//Intent intent = new Intent(this, com.example.view.DisplayProductsActivity.class);
 		Intent intent = new Intent(this, com.example.view.DisplayProductListActivity.class);
+		startActivity(intent);
+	}
+	
+	public void manageProducts(View view) {
+		Intent intent = new Intent(this, com.example.view.ManageProductsActivity.class);
 		startActivity(intent);
 	}
 	
