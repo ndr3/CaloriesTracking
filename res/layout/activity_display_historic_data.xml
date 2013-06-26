@@ -36,31 +36,39 @@
          android:onClick="viewMonthData"
          android:text="@string/view_month_data" />
 
-     <RadioButton
-         android:id="@+id/lineGraphRadioButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/button1"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="16dp"
-         android:text="@string/line_graph_radioButton" />
+  <Button
+      android:id="@+id/button1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignRight="@+id/activity_group"
+      android:layout_marginBottom="36dp"
+      android:onClick="viewGraph"
+      android:text="@string/view_graph_representation" />
 
-     <Button
-         android:id="@+id/button1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="40dp"
-         android:onClick="viewGraph"
-         android:text="@string/view_graph_representation" />
+  <RadioGroup
+      android:id="@+id/activity_group"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginBottom="14dp"
+      android:orientation="vertical" >
 
-     <RadioButton
-         android:id="@+id/barGraphRadioButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/lineGraphRadioButton"
-         android:layout_centerHorizontal="true"
-         android:text="@string/bar_graph_radioButton" />
+      <RadioButton
+          android:id="@+id/lineGraphRadioButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/line_graph_radioButton"
+          android:textIsSelectable="true" />
+
+      <RadioButton
+          android:id="@+id/barGraphRadioButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="93dp"
+          android:text="@string/bar_graph_radioButton"
+          android:textIsSelectable="true" />
+  </RadioGroup>
     
 </RelativeLayout>

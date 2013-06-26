@@ -43,7 +43,7 @@ public class CaloriesCtrl {
 		} catch (Exception e) {		
 			int defaultTotalCalories = 0;
 			consumedCalories = defaultTotalCalories;
-			caloriesDbAdapter.addCalories(defaultTotalCalories);
+			caloriesDbAdapter.addCalories(defaultTotalCalories, 0);
 			
 			System.out.println("Ctrl/Constructor exception");
 			e.printStackTrace();
@@ -55,10 +55,10 @@ public class CaloriesCtrl {
 		
 	}
 	
-	public long addCalories(int calories) {		
+	public long addCalories(int calories, int productID) {		
 		try {
 			caloriesInfo.addCalories(calories);
-			return caloriesDbAdapter.addCalories(calories);		
+			return caloriesDbAdapter.addCalories(calories, productID);		
 		} catch (Exception e) {
 			System.out.println("Ctrl/getCalories exception");
 			e.printStackTrace();

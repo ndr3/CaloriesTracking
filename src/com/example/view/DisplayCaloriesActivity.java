@@ -31,7 +31,7 @@ public class DisplayCaloriesActivity extends Activity{
 
 			//add calories to DB			
 			try {
-				if (caloriesCtrl.addCalories(calories) == -1) {
+				if (caloriesCtrl.addCalories(calories, productID) == -1) {
 					System.out.println("Failure when adding calories!");
 				}
 			} catch (NullPointerException e) {

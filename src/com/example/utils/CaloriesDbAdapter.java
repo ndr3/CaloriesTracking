@@ -24,17 +24,18 @@ public class CaloriesDbAdapter extends Activity {
 	private static final String KEY_EATEN_DATE = "eaten_date";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_BARCODE = "barcode";
+	private static final String KEY_PRODUCTID = "productID";
 			
 	
 	private static final String TAG = "CaloriesDbAdapter";
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase db;
 
-	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date long )";
+	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date long, integer productID )";
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement, caloric_need integer)";
 	private static final String CREATE_PRODUCTS_TABLE = "CREATE TABLE IF NOT EXISTS products (_id integer primary key autoincrement, name string not null, calories_no integer not null, barcode string)";
 	
-	private static final String DATABASE_NAME = "CaloriesDB2";
+	private static final String DATABASE_NAME = "CaloriesDB3";
 	private static final String DATABASE_CALORIES_TABLE = "calories";
 	private static final String DATABASE_USERS_TABLE = "users";
 	private static final String DATABASE_PRODUCTS_TABLE = "products";
@@ -127,12 +128,13 @@ public class CaloriesDbAdapter extends Activity {
 		} 
 	}
 	
-	public long addCalories(int calories) {
+	public long addCalories(int calories, int productID) {
 		ContentValues values = new ContentValues();
 		Calendar rightNow = Calendar.getInstance();
 		long timestamp = rightNow.getTimeInMillis();
 		values.put(KEY_EATEN_DATE, timestamp);
 		values.put(KEY_CALORIES, calories);
+		values.put(KEY_PRODUCTID, productID);
 		
 		return db.insert(DATABASE_CALORIES_TABLE, null, values);
 	}
